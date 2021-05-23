@@ -2,7 +2,7 @@ from .config import *
 import os
 import pyfiglet
 
-ascii_banner = pyfiglet.figlet_format("Leetcode cli")
+ascii_banner = pyfiglet.figlet_format("LeetCode cli")
 print(ascii_banner)
 
 removeQuotes()
