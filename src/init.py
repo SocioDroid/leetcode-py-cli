@@ -7,6 +7,7 @@ solvedQuestions = getSolvedQuestions()
 availableSubmissions = getSubmissionDirectoryContents()
 submissionDirectory = getSubmissionDirectory()
 submissionjson = submissionDirectory+"submission.json"
+codeDirectory = submissionDirectory+"/code/"
 language = getLanguages()
 jsonfile = []
 solvedSubmissions = {}

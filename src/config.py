@@ -44,8 +44,8 @@ def getCookies():
 
 def getSubmissionDirectory():
     directory = os.getenv("SUBMISSION_DIRECTORY")
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    if not os.path.exists(directory+"/code/"):
+        os.makedirs(directory+"/code/")
     if not os.path.isfile(directory+"submission.json"):
         open(directory+"submission.json", 'w').close()
     return directory

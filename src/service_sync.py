@@ -41,7 +41,7 @@ def writeSubmission(id, submission):
     lang = submission["lang"]
     filename = "{}.{}.{}".format(id, title, language[lang])
 
-    fd = open(submissionDirectory+filename, "w+")
+    fd = open(codeDirectory+filename, "w+")
     fd.write(code)
     # write into file
 
