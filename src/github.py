@@ -30,7 +30,7 @@ def pushRepo(response):
     if not checkRepoURL():
         os.system("git init")
         url = "https://{}:{}@github.com/{}/{}.git".format(response["owner"]["login"], getGithubToken(), response["owner"]["login"], response["name"])
-        os.system("git remote set-url origin "+url)
+        os.system("git remote add origin "+url)
         with open("../.env", "a") as myfile:
             myfile.write("\nGITHUB_REPO="+url)
     os.system("git add -A")
