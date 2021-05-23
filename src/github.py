@@ -34,7 +34,14 @@ def pushRepo(response):
         with open("../.env", "a") as myfile:
             myfile.write("\nGITHUB_REPO="+url)
     os.system("git add -A")
-    os.system("git commit -m 'Created using leetcode-cli'")
+
+    import glob
+
+    list_of_files = glob.glob('code/*.*') # * means all if need specific format then *.csv
+    latest_file = max(list_of_files, key=os.path.getmtime)
+
+    os.system("git commit -m \"Added "+latest_file.split('/')[-1].split('.')[-2]+"\"")
+
     os.system("git branch -M main")
     
     os.system("git push -u origin main")

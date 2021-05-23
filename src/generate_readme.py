@@ -17,14 +17,15 @@ def generateReadme():
 # Leetcode Solutions
 My accepted leetcode solutions
 
-|NO|Title|Runtime|Memory|Timestamp|Solution|
-|---|-----|--------|-------|--------|--------|
+|ID|Title|Runtime|Memory|Timestamp|Solution|
+|---|-----|--------|-------|-------------|--------|
 '''
     for problem in solvedProblems:
-        readme+="|{}|[{}]({})|{}|{}|{}|[{}]({})|\n".format(problem["id"],problem["title"].title(),"https://leetcode.com/problems/"+problem["url"],problem["runtime"],problem["memory"],problem["timestamp"],problem["language"],problem["filename"])
+        readme+="|{}|[{}]({})|{}|{}|{}|[{}]({})|\n".format(problem["id"],problem["title"].title(),"https://leetcode.com/problems/"+problem["url"],problem["runtime"],problem["memory"],problem["timestamp"],problem["language"],"code/"+problem["filename"])
 
     f = open(getSubmissionDirectory()+"README.md", 'w')
     f.seek(0)
+    readme+="\nThis repository was generated using [leetcode-cli](https://github.com/SocioDroid/leetcode-cli)"
     f.write(readme)
     f.truncate()
     f.close()
