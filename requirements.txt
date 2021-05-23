@@ -1,4 +1,3 @@
 python-dotenv
 requests
-json
 halo

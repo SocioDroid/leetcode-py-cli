@@ -7,6 +7,26 @@ def handleError(error):
     print(error)
     pass
 
+def checkRepoURL():
+    if "GITHUB_REPO" in os.environ:
+        return True
+    return False
+
+def getRepoURL():
+    if checkRepoURL():
+        return os.environ["GITHUB_REPO"]
+    
+def checkGithubToken():
+    if os.environ['GITHUB_TOKEN']:
+        return True
+    return False
+
+def getGithubToken():
+    if checkGithubToken():
+        return os.environ["GITHUB_TOKEN"]
+    else:
+        # handle error 
+        pass     
 def check():
     if os.environ['LEETCODE_CSRFTOKEN'] and os.environ['LEETCODE_SESSION']:
         return True
