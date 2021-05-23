@@ -3,3 +3,4 @@ requests
 halo
 tabulate
 argparse
+pyfiglet
