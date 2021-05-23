@@ -25,14 +25,14 @@ def createRepo():
     return json.loads(response.content.decode('utf-8'))
 
 def pushRepo(response):
+    
+    os.chdir(getSubmissionDirectory())
     if not checkRepoURL():
         os.system("git init")
         url = "https://{}:{}@github.com/{}/{}.git".format(response["owner"]["login"], getGithubToken(), response["owner"]["login"], response["name"])
         os.system("git remote set-url origin "+url)
-        with open(".env", "a") as myfile:
+        with open("../.env", "a") as myfile:
             myfile.write("\nGITHUB_REPO="+url)
-    
-    os.chdir(getSubmissionDirectory())
     os.system("git add -A")
     os.system("git commit -m 'Created using leetcode-cli'")
     os.system("git branch -M main")
