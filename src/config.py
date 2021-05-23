@@ -53,7 +53,7 @@ def getSubmissionDirectory():
     return directory
 
 def getSubmissionDirectoryContents():
-    content = os.listdir(getSubmissionDirectory())
+    content = os.listdir(getSubmissionDirectory()+'/code/')
     return [x.split('.')[0] for x in content]    
     
 def getGraphqlData():
@@ -105,5 +105,5 @@ def getSolvedQuestions():
             solvedQuestions.update({
                 question['stat']["frontend_question_id"]: question['stat']["question__title_slug"]
             })
-    
+
     return solvedQuestions

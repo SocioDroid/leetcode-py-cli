@@ -3,6 +3,7 @@ import os
 import requests
 from .generate_readme import generateReadme
 from .config import  checkRepoURL, getGithubToken, getSubmissionDirectory
+from dotenv import set_key
 
 token = getGithubToken()
 
@@ -31,8 +32,9 @@ def pushRepo(response):
         os.system("git init")
         url = "https://{}:{}@github.com/{}/{}.git".format(response["owner"]["login"], getGithubToken(), response["owner"]["login"], response["name"])
         os.system("git remote add origin "+url)
-        with open("../.env", "a") as myfile:
-            myfile.write("\nGITHUB_REPO="+url)
+        # with open("../.env", "a") as myfile:
+        #     myfile.write("\nGITHUB_REPO="+url)
+        set_key('../.env', 'GITHUB_REPO', url)
     os.system("git add -A")
 
     import glob

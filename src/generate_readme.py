@@ -25,7 +25,7 @@ My accepted leetcode solutions
 
     f = open(getSubmissionDirectory()+"README.md", 'w')
     f.seek(0)
-    readme+="\nThis repository was generated using [leetcode-cli](https://github.com/SocioDroid/leetcode-cli)"
+    readme+="\nThis repository was generated using [leetcode-cli](https://github.com/SocioDroid/leetcode-py-cli)"
     f.write(readme)
     f.truncate()
     f.close()

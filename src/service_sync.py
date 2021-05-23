@@ -3,16 +3,15 @@ import requests
 import json
 import re
 from .config import *
-from dotenv import load_dotenv
 from datetime import datetime
 import requests
-from src.init import *
+import src.init as init
 
 
 def getSubmissions(title):
-    data["variables"]["questionSlug"] = title
-    resp = requests.post(baseurl+"/graphql",
-                         cookies=cookies, json=data, timeout=10)
+    init.data["variables"]["questionSlug"] = title
+    resp = requests.post(init.baseurl+"/graphql",
+                         cookies=init.cookies, json=init.data, timeout=10)
     resp = json.loads(resp.content.decode('utf-8'))
     for submission in resp["data"]["submissionList"]["submissions"]:
             if submission["statusDisplay"] == "Accepted":
@@ -20,7 +19,7 @@ def getSubmissions(title):
     
 
 def getSubmissionCode(submissionURL):
-    resp = requests.get(baseurl+submissionURL, cookies=cookies, timeout=10)
+    resp = requests.get(init.baseurl+submissionURL, cookies=init.cookies, timeout=10)
     code = re.search("submissionCode:.*", resp.text).group(0)
     return eval(code[16:-1])
 
@@ -30,15 +29,15 @@ def writeSubmission(id, submission):
     code = getSubmissionCode(submission['url'])
 
     # Write into file
-    title = solvedQuestions[id]
+    title = init.solvedQuestions[id]
     lang = submission["lang"]
-    filename = "{}.{}.{}".format(id, title, language[lang])
+    filename = "{}.{}.{}".format(id, title, init.language[lang])
 
-    fd = open(codeDirectory+filename, "w+")
+    fd = open(init.codeDirectory+filename, "w+")
     fd.write(code)
     # write into file
 
-    jsonfile.append({
+    init.jsonfile.append({
         "id": id,
         "title": " ".join(title.split("-")),
         "url": title,
@@ -50,17 +49,18 @@ def writeSubmission(id, submission):
     })
     # Write into json
 
-    print("Submission stored at: " + submissionDirectory+filename)
+    print("Submission stored at: " + init.submissionDirectory+filename)
     return
 
 
 def downloadSubmission(id):
-    solvedQuestions = getSolvedQuestions()
-    if id in solvedQuestions:
-        submission = getSubmissions(solvedQuestions[id])
+    init.solvedQuestions = getSolvedQuestions()
+    # print(solvedQuestions, type(id), id)
+    if id in init.solvedQuestions:
+        submission = getSubmissions(init.solvedQuestions[id])
         writeSubmission(id, submission)
-        with open(submissionDirectory+'submission.json', 'w') as f:
-            json.dump(jsonfile, f)
+        with open(init.submissionDirectory+'submission.json', 'w') as f:
+            json.dump(init.jsonfile, f)
         return
 
     print("You haven't solved this question yet or have no accepted solutions.")
