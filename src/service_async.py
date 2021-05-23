@@ -121,7 +121,6 @@ def downloadAllSubmissions():
     loop.run_until_complete(future)
 
     if init.rateLimitedQuestions:
-        print(init.rateLimitedQuestions)
         init.solvedSubmissions = init.rateLimitedQuestions.copy()
         init.rateLimitedQuestions.clear()
         time.sleep(2)

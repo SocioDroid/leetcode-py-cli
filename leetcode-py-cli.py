@@ -24,6 +24,14 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "-f",
+    "--force-update",
+    help="Forcefully update all solution.",
+    action='store_true',
+    default=0,
+)
+
+parser.add_argument(
     "-s",
     "--submission",
     help="Download specific submission from Leetcode",
@@ -97,6 +105,8 @@ elif args.github:
 
     downloadAllSubmissions()
     initGit() 
-
+elif args.force_update:
+    init.availableSubmissions = []
+    downloadAllSubmissions()
 else:
     parser.print_help()
