@@ -12,13 +12,6 @@ import time
 from src.init import *
 from halo import Halo
 
-
-
-# load directory contents
-if os.stat(submissionjson).st_size != 0:
-    jsonfile = json.load(open(submissionjson))
-
-
 def get_submissions_async_request(session, id, title):
     global data
     data["variables"]["questionSlug"] = title
@@ -112,6 +105,7 @@ async def get_submission_code_asynchronous():
 
 @Halo(text='Loading Questions', spinner='dots')
 def downloadAllSubmissions():
+    solvedQuestions = getSolvedQuestions()
     global solvedSubmissions
     if len(solvedSubmissions) == 0:
         loop = asyncio.get_event_loop()
@@ -119,6 +113,7 @@ def downloadAllSubmissions():
         loop.run_until_complete(future)
         # generates solvedSubmissions
 
+    
     loop = asyncio.get_event_loop()
     future = asyncio.ensure_future(get_submission_code_asynchronous())
     loop.run_until_complete(future)

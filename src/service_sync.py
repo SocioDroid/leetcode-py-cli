@@ -9,13 +9,6 @@ import requests
 from src.init import *
 
 
-# load_dotenv()
-
-# load directory contents
-if os.stat(submissionjson).st_size != 0:
-    jsonfile = json.load(open(submissionjson))
-
-
 def getSubmissions(title):
     data["variables"]["questionSlug"] = title
     resp = requests.post(baseurl+"/graphql",
@@ -62,6 +55,7 @@ def writeSubmission(id, submission):
 
 
 def downloadSubmission(id):
+    solvedQuestions = getSolvedQuestions()
     if id in solvedQuestions:
         submission = getSubmissions(solvedQuestions[id])
         writeSubmission(id, submission)

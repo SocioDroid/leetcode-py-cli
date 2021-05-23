@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 import requests
 import json
+from halo import Halo
+
 load_dotenv()
 def handleError(error):
     print(error)
@@ -91,13 +93,11 @@ def getLanguages():
     }
     return languages
 
+@Halo(text='Connecting Server', spinner='dots')
 def getSolvedQuestions():
     solvedQuestions = {}
     resp = requests.get(getBaseURL()+"/api/problems/all/",
                         cookies=getCookies(), timeout=10)
-    f = open("out.txt", "w+")
-    f.write(resp.text)
-    f.close()
     
     question_list = json.loads(resp.content.decode('utf-8'))
     for question in question_list['stat_status_pairs']:
@@ -105,19 +105,5 @@ def getSolvedQuestions():
             solvedQuestions.update({
                 question['stat']["frontend_question_id"]: question['stat']["question__title_slug"]
             })
+    
     return solvedQuestions
-
-
-# def init():
-    # print(cookies)
-    # data = getGraphqlData()
-    # baseurl = getBaseURL()
-    # solvedQuestions = getSolvedQuestions()
-    # availableSubmissions = getSubmissionDirectoryContents()
-    # submissionDirectory = getSubmissionDirectory()
-    # submissionjson = submissionDirectory+"submission.json"
-    # language = getLanguages()
-    # jsonfile = []
-    # solvedSubmissions = {}
-    # solvedQuestions = {}
-    # rateLimitedQuestions = {}
