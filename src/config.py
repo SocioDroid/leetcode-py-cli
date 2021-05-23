@@ -107,3 +107,9 @@ def getSolvedQuestions():
             })
 
     return solvedQuestions
+
+def removeQuotes():
+    with open(".env", "r+") as f:
+        old = f.read()
+        f.seek(0)
+        f.write(old.replace('"', ''))

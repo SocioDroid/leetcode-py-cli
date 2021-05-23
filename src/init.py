@@ -1,4 +1,11 @@
-from src.config import *
+from .config import *
+import os
+import pyfiglet
+
+ascii_banner = pyfiglet.figlet_format("Leetcode cli")
+print(ascii_banner)
+
+removeQuotes()
 
 cookies = getCookies()
 data = getGraphqlData()

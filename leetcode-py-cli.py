@@ -1,6 +1,6 @@
+from src.init import *
 from src.service_async import *
 from src.service_sync import *
-from src.init import *
 from src.github import initGit
 from dotenv import load_dotenv, set_key
 import argparse
