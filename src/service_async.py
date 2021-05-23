@@ -66,7 +66,7 @@ def get_submission_code_async_request(session, id, submission):
         lang = submission["lang"]
         filename = "{}.{}.{}".format(id, title, language[lang])
 
-        fd = open(submissionDirectory+filename, "w+")
+        fd = open(codeDirectory+filename, "w+")
         fd.write(eval(code[16:-1]))
         # write into file
 
