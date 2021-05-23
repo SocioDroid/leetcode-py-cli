@@ -112,9 +112,6 @@ def downloadAllSubmissions():
         loop = asyncio.get_event_loop()
         future = asyncio.ensure_future(get_submissions_asynchronous())
         loop.run_until_complete(future)
-        # print(len(solvedSubmissions), solvedQuestions)
-        # generates solvedSubmissions
-
     
     loop = asyncio.get_event_loop()
     future = asyncio.ensure_future(get_submission_code_asynchronous())
