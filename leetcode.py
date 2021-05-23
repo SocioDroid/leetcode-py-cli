@@ -1,66 +1,92 @@
 from src.service_async import *
 from src.service_sync import *
 from src.init import *
-from dotenv import load_dotenv
-from dotenv import set_key
-import click
+from dotenv import load_dotenv, set_key
+import argparse
+from tabulate import tabulate
 
 load_dotenv()
 
-@click.group()
-# @click.command()
-@click.option('--github-token','-gt', 'git',  help='Set Github token.')
-@click.option('--submission-directory', '-sd', 'directory',  help='Directory of solution files.')
-@click.option('--repository', '-r', 'repo',  help='Github repository URL.')
-@click.option('--leetcode-session','-ls', 'session',   help='Set leetcode session variable.')
-@click.option('--leetcode-cookie', '-lc', 'cookie',  help='Set leetcode cookie.')
-@click.option('--all', '-a', 'isAll',  help='Get all submissions.')
-def cli(git, directory, repo, session, cookie):
-    """Simple program that upload your leetcode solutions to github repository."""
+parser = argparse.ArgumentParser(
+    description="Simple program that upload your leetcode solutions to github repository.",
+    prog="leetcode-python-cli",
+)
+
+parser.add_argument(
+    "-a",
+    "--all",
+    help="Get All submissions from Leetcode",
+    action='store_true',
+    default=0,
+)
+
+parser.add_argument(
+    "-q",
+    "--get-question",
+    help="Get specified problem id submissions from Leetcode",
+    metavar='id'
+)
+
+parser.add_argument(
+    "-ls",
+    "--list-questions",
+    help="Get specified problem id submissions from Leetcode",
+    action='store_true',
+    default=0,
+)
+
+parser.add_argument(
+    "-l",
+    "--login",
+    help="Get specified problem id submissions from Leetcode",
+    metavar=('csrf', 'session'),
+    nargs=2
+)
+
+parser.add_argument(
+    "-u",
+    "--repository-url",
+    help="Get specified problem id submissions from Leetcode",
+    nargs=1,
+    metavar='url'
+)
+
+parser.add_argument(
+    "-g",
+    "--github-token",
+    help="Get specified problem id submissions from Leetcode",
+    nargs=1,
+    metavar='token'
+)
+
+parser.add_argument("-v", "--version", action="version", version="%(prog)s 1.0")
+args = parser.parse_args()
+
+if args.all:
+    downloadAllSubmissions()
+
+elif args.get_question:
+    downloadSubmission(args.get_question)
+
+elif args.list_questions:    
+    downloadAllSubmissions()
+    ls = []
+    for i in jsonfile:
+        j =  list(i.values())
+        ls.append([j[0], j[1], j[4], j[5], j[6], j[7]])
+
+    print(tabulate(sorted(ls, key= lambda x : x[0]), headers=["No.","Title", 'Submitted On', 'Memory', 'Time', 'Langauge'], tablefmt='fancy_grid'))
+
+elif args.login:
+    set_key('.env', 'LEETCODE_SESSION', args.login[0])
+    set_key('.env', 'LEETCODE_CSRFTOKEN', args.login[1])
+
+elif args.github_token:
+    set_key('.env', 'GITHUB_TOKEN', args.github_token[0])
     
-    if directory:
-        '''Directory of solution files.'''
-        set_key('.env', 'SUBMISSION_DIRECTORY', directory)
-        click.echo('Added successfully')
-
-    if repo:
-        '''Github repository URL.'''
-        set_key('.env', 'REPOSITORY_URL', repo)
-        click.echo('Added successfully')
-
-    if session:
-        '''Set leetcode session variable.'''
-        set_key('.env', 'LEETCODE_SESSION', session)
-        click.echo('Added successfully')
-
-    if cookie:
-        '''Set Leetcode cookie'''
-        set_key('.env', 'LEETCODE_COOKIE', cookie)
-        click.echo('Added successfully')
-
-    if git:
-        '''Set Github token'''
-        set_key('.env', 'GITHUB_TOKEN', git)
-        click.echo('Added successfully')
-
-@cli.command("download-submission")
-def get_all_submissions(isAll, id=None):
-    if isAll:
-        downloadAllSubmissions()
-    else:
-        downloadSubmission(id)   
-
-@cli.command("ls-questions")
-def get_all_submissions():
-    return
-
-# @cli.command("download-submission")
-# @click.argument('questionId')
-# def get_submissions(questionId):
-#     downloadSubmission(questionId)
-
-if __name__ == '__main__':
-    cli()
-# downloadAllSubmissions()
-# downloadSubmission(int(input("Enter Question Id :")))
+elif args.repository_url:
+    set_key('.env', 'REPOSITORY_URL', args.repository_url)
+        
+else:
+    parser.print_help()
 
