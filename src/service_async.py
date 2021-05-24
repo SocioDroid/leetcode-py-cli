@@ -13,6 +13,7 @@ import time
 import src.init as init
 from halo import Halo
 
+rateLimitFlag = False
 def get_submissions_async_request(session, id, title):
     data = init.data
     data["variables"]["questionSlug"] = title
@@ -76,7 +77,7 @@ def get_submission_code_async_request(session, id, submission):
             "title": " ".join(title.split("-")),
             "url": title,
             "filename": filename,
-            "timestamp": datetime.utcfromtimestamp(int(submission["timestamp"])).strftime('%d-%m-%Y %H:%M'),
+            "timestamp": datetime.utcfromtimestamp(int(submission["timestamp"])).strftime('%d-%m-%Y'),
             "memory": submission["memory"],
             "runtime": submission["runtime"],
             "language": lang
@@ -104,14 +105,19 @@ async def get_submission_code_asynchronous():
             for response in await asyncio.gather(*tasks):
                 pass
 
+def getallsubmissions():      
+    loop = asyncio.get_event_loop()
+    future = asyncio.ensure_future(get_submission_code_asynchronous())
+    loop.run_until_complete(future)
+  
 # @Halo(text='Loading Questions', spinner='dots')
 def downloadAllSubmissions():
+    global rateLimitFlag
+
     spinner = Halo(text='Gathering questions', spinner='dots')
     spinner.start()
     init.solvedQuestions = getSolvedQuestions()
     spinner.succeed("Questions loaded successfully")
-
-
     spinner = Halo(text='Loading submissions', spinner='dots')
     spinner.start()
     # global solvedSubmissions
@@ -120,29 +126,25 @@ def downloadAllSubmissions():
         loop = asyncio.get_event_loop()
         future = asyncio.ensure_future(get_submissions_asynchronous())
         loop.run_until_complete(future)
-
-    spinner.succeed("Submissions loaded successfully")
-
     
+    getallsubmissions()
+    
+    spinner.succeed("Submissions loaded successfully")
     spinner = Halo(text='Creating files', spinner='dots')
     spinner.start()
-    
-    loop = asyncio.get_event_loop()
-    future = asyncio.ensure_future(get_submission_code_asynchronous())
-    loop.run_until_complete(future)
-    
-    
-
-    if init.rateLimitedQuestions:
+      
+    while init.rateLimitedQuestions:        
         init.solvedSubmissions = init.rateLimitedQuestions.copy()
         init.rateLimitedQuestions.clear()
-        time.sleep(2)
-        downloadAllSubmissions()
-    
+        time.sleep(5)
+        getallsubmissions()
+            
     spinner.succeed("Files saved successfully at submissions/")
 
-    spinner = Halo(text='Gattering details', spinner='dots')
+    spinner = Halo(text='Gathering details', spinner='dots')
     spinner.start()    
     with open(init.submissionDirectory+'submission.json', 'w') as f:
         json.dump(init.jsonfile, f)
     spinner.succeed("Collected required details")
+    spinner.stop()
+

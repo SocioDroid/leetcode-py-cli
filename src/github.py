@@ -5,12 +5,11 @@ from .generate_readme import generateReadme
 from .config import  checkRepoURL, getGithubToken, getSubmissionDirectory
 from dotenv import set_key
 
-token = getGithubToken()
-
 def createRepo():
     reponame = input("Enter the name of the repository: ")
+    print("Reponame : " + reponame)
     headers = {
-        'Authorization': "token "+token,
+        'Authorization': "token "+getGithubToken(),
     }
     data = { 
         "name": reponame, 
@@ -20,8 +19,7 @@ def createRepo():
     message = json.loads(response.content.decode('utf-8'))     
     print(response.status_code)
     if response.status_code == 422:
-        print(message["errors"][0]["message"])
-        print("Please try again!")
+        print("Please try again! : GITHUB ERRROR"+ getGithubToken()+"\n"+response.text)
         return createRepo()    
     return json.loads(response.content.decode('utf-8'))
 
@@ -34,7 +32,7 @@ def pushRepo(response):
         os.system("git remote add origin "+url)
         # with open("../.env", "a") as myfile:
         #     myfile.write("\nGITHUB_REPO="+url)
-        set_key('../.env', 'GITHUB_REPO', url)
+        set_key('../.env', 'GITHUB_REPO', url)        
     os.system("git add -A")
 
     import glob

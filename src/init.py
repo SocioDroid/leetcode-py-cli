@@ -8,8 +8,6 @@ from threading import Thread
 ascii_banner = pyfiglet.figlet_format("LeetCode cli")
 print(ascii_banner)
 
-removeQuotes()
-
 cookies = getCookies()
 data = getGraphqlData()
 baseurl = getBaseURL()

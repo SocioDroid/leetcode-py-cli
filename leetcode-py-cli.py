@@ -102,7 +102,8 @@ elif args.github:
     if not checkGithubToken():
         git = input('Enter Github token : ')
         set_key('.env', 'GITHUB_TOKEN', git)
-
+        os.environ["GITHUB_TOKEN"] = git
+        load_dotenv()    
     downloadAllSubmissions()
     initGit() 
 elif args.force_update:
