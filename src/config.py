@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 import requests
 import json
-from halo import Halo
 
 load_dotenv()
 def handleError(error):
@@ -16,6 +15,7 @@ def checkRepoURL():
 
 def getRepoURL():
     if checkRepoURL():
+        print(os.environ["GITHUB_REPO"])
         return os.environ["GITHUB_REPO"]
     
 def checkGithubToken():
@@ -28,7 +28,9 @@ def getGithubToken():
         return os.environ["GITHUB_TOKEN"]
     else:
         # handle error 
-        pass     
+        handleError("Please fill the credentials. Run python3 leetcode-py-cli.py --github!") 
+        exit(1)
+
 def check():
     if os.environ['LEETCODE_CSRFTOKEN'] and os.environ['LEETCODE_SESSION']:
         return True
@@ -42,7 +44,8 @@ def getCookies():
             }
         return cookies
     else:
-        handleError("Please fill the credentials in .env directory !")
+        handleError("Please login. Run python3 leetcode-py-cli.py --login!")
+        exit(1)
 
 def getSubmissionDirectory():
     directory = os.getenv("SUBMISSION_DIRECTORY")
@@ -93,7 +96,6 @@ def getLanguages():
     }
     return languages
 
-@Halo(text='Connecting Server', spinner='dots')
 def getSolvedQuestions():
     solvedQuestions = {}
     resp = requests.get(getBaseURL()+"/api/problems/all/",

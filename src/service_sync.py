@@ -6,7 +6,7 @@ from .config import *
 from datetime import datetime
 import requests
 import src.init as init
-
+from halo import Halo
 
 def getSubmissions(title):
     init.data["variables"]["questionSlug"] = title
@@ -49,18 +49,33 @@ def writeSubmission(id, submission):
     })
     # Write into json
 
-    print("Submission stored at: " + init.submissionDirectory+filename)
+    # print("Submission stored at: " + init.submissionDirectory+filename)
     return
 
 
 def downloadSubmission(id):
+    spinner = Halo(text='Gathering question', spinner='dots')
+    spinner.start()
     init.solvedQuestions = getSolvedQuestions()
+    spinner.succeed("Question loaded successfully")
+
     # print(solvedQuestions, type(id), id)
+    spinner = Halo(text='Loading submission', spinner='dots')
+    spinner.start()
     if id in init.solvedQuestions:
         submission = getSubmissions(init.solvedQuestions[id])
+        spinner.succeed("Submission loaded successfully")
+
+        spinner = Halo(text='Creating file', spinner='dots')
+        spinner.start()
         writeSubmission(id, submission)
+        spinner.succeed("Files saved successfully at submissions/")
+
+        spinner = Halo(text='Gattering details', spinner='dots')
+        spinner.start()   
         with open(init.submissionDirectory+'submission.json', 'w') as f:
             json.dump(init.jsonfile, f)
+        spinner.succeed("Collected required details")
         return
 
-    print("You haven't solved this question yet or have no accepted solutions.")
+    spinner.fail("You haven't solved this question yet or have no accepted solutions.")
