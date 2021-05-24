@@ -27,11 +27,11 @@
 
 <p align="center">
   <a href="#about">About</a> •
+  <a href="#features">Features</a> •
   <a href="#installation">Installation</a> •
   <a href="#usage">Usage</a> •
-  <a href="#features">Features</a> •
   <a href="#github-integration">Github Integration</a> • 
-  <a href="#credits">Credits</a> •
+  <a href="#credits">Credits</a>
 </p>
 
 ---
@@ -50,6 +50,18 @@ codes to it.
 </tr>
 </table>
 
+## Features
+<h1 align="left">
+  <img src="static/leetcode-ls.svg" alt="leetcode-py-cli" width="700px"></a>
+  <br>
+</h1>
+
+ - **Async support** to fetch all submissions.
+ - Uses **LeetCode's GraphQL** to fetch data.
+ - **Github's REST API** integration to auto-create repository.
+ - Retrieve & push new submissions on the go.
+
+
 ## Installation
 
 ##### Downloading and installing steps:
@@ -59,6 +71,19 @@ codes to it.
 * Install dependencies 
           
         pip install -r requirements.txt 
+
+##### Signing In
+* LeetCode is protected by reCAPTCHA which restricts us to sign in directly. So instead we'll be using the session token to authorize the user. 
+	1. Sign In to [LeetCode](https://leetcode.com/accounts/login/) using your browser as you would normally do.
+	2.  We need the `csrftoken` & `LEETCODE_SESSION` cookie which can be easily fetched using the browser devtools. 
+	  <img src="static/leetcode-login.gif" alt="leetcode-login" width="700px">	
+	3. To login, run the following command and paste the cookies.
+
+			$ python3 leetcode-py-cli.py -l                     
+			                                
+			Enter LEETCODE_SESSION : <your LEETCODE_SESSION>
+			Enter csrftoken : <your csrftoken>
+
 
 ## Usage
 	 python3 leetcode-py-cli.py -h
@@ -75,14 +100,46 @@ This will display help for the tool. Here are all the options it supports.
 | -g, --github          | Push your code to github                   | leetcode-py-cli<span>.</span>py -g    |
 | -v, --version         | Show program's version number              | leetcode-py-cli<span>.</span>py -v    | 
 
-## Features
+## Github Integration
+leetcode-py-cli will automatically push your submissions to a github repo and later update it regularly once new submissions are made.
+#### Step 1
+Visit https://github.com/settings/tokens and generate a personal access token.
+Select the scope as follows:
+<img src="static/github-scope.png" alt="github-scope" width="500px">		
 
-<h1 align="left">
-  <img src="static/leetcode-ls.svg" alt="leetcode-py-cli" width="700px"></a>
-  <br>
-</h1>
+#### Step 2
+Run the tool with the `-g` option which will download all the submissions and create a new repo only for the first time. 
 
- - **Async support** to fetch all submissions.
- - Uses **LeetCode's GraphQL** to fetch data.
- - **Github's REST API** integration to auto-create repository.
- - Retrieve & push new submissions on the go.
+	$ python3 leetcode-py-cli.py -g
+	
+	Enter Github token : <your personal access token>
+	
+	✔ Questions loaded successfully
+	✔ Submissions loaded successfully
+	✔ Files saved successfully at submissions/
+	✔ Collected required details
+	
+	Enter the name of the repository: leetcode
+
+	✔ Repo has been successfully created. You can view it here:
+	https://github.com/SocioDroid/leetcode/
+
+Check out **[this repo](https://github.com/SocioDroid/leetcode/)** which was created using leetcode-py-cli
+
+## TO DO
+- [ ] Implement inplace code submisson
+- [ ] Display other statistics
+- [ ] Execute test cases
+- [ ] Display problem statements 
+  
+
+
+## Credits
+| [![Aishwarya Kendle](https://i.ibb.co/2vmw2pB/47445489-1-1.jpg)](https://www.linkedin.com/in/aishwarya-kendle/) 	| [![Community](https://i.ibb.co/FXxFTmC/1577437525263.jpg)](https://www.linkedin.com/in/rushikesh-zanwar/)		|
+|:---------------------------------------------------------------------------------------------------------:	|:------------------------------------------------------------------------------------------------------------------------------------------------:		|
+|                                            **Aishwarya Kendle**                                            	|                                                           **Rushikesh Zanwar**                         			                          	    |
+
+## Contributing
+
+Got **something interesting** you'd like to **share**. 
+Feel free to open a pull request !
