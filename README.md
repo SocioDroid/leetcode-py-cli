@@ -30,7 +30,7 @@
 
 ---
 
-## About
+## About 💡
 
 <table>
 <tr>
@@ -44,7 +44,7 @@ codes to it.
 </tr>
 </table>
 
-## Features
+## Features ⚡️
 <h1 align="left">
   <img src="static/leetcode-ls.svg" alt="leetcode-py-cli" width="700px"></a>
   <br>
@@ -59,7 +59,7 @@ codes to it.
  - Retrieve & push new submissions on the go.
 
 
-## Installation
+## Installation ⚙️
 
 ##### Downloading and installing steps:
 * **[Download](https://github.com/SocioDroid/leetcode-py-cli/archive/main.zip)** the latest version of the repo or clone it using 
@@ -85,7 +85,7 @@ codes to it.
 	   Enter csrftoken : <your csrftoken>
 
 
-## Usage
+## Usage 🗄️
 	$ python3 leetcode-py-cli.py -h
 This will display help for the tool. Here are all the options it supports.
 
@@ -100,7 +100,7 @@ This will display help for the tool. Here are all the options it supports.
 | -g, --github          | Push your code to github                   | leetcode-py-cli<span>.</span>py -g    |
 | -v, --version         | Show program's version number              | leetcode-py-cli<span>.</span>py -v    | 
 
-## Github Integration
+## Github Integration 🔧️
 leetcode-py-cli will automatically push your submissions to a github repo and later update it regularly once new submissions are made.
 #### Step 1
 Visit https://github.com/settings/tokens and generate a personal access token.
@@ -126,7 +126,7 @@ Run the tool with the `-g` option which will download all the submissions and cr
 
 Check out **[this repo](https://github.com/SocioDroid/leetcode/)** which was created using leetcode-py-cli
 
-## TO DO
+## TO DO ☑️
 - [ ] Implement inplace code submisson
 - [ ] Display other statistics
 - [ ] Execute test cases
@@ -139,7 +139,7 @@ Check out **[this repo](https://github.com/SocioDroid/leetcode/)** which was cre
 |:---------------------------------------------------------------------------------------------------------:	|:------------------------------------------------------------------------------------------------------------------------------------------------:		|
 |                                            **Aishwarya Kendle**                                            	|                                                           **Rushikesh Zanwar**                         			                          	    |
 
-## Contributing
+## Contributing :heart:
 
 Got **something interesting** you'd like to **share**. 
 Feel free to open a pull request !
