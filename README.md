@@ -5,7 +5,7 @@
 </h1>
 
 
-<h4 align="center">A CLI utility integrated with LeetCode for accessing your submissions and many </h4>
+<h4 align="center">A CLI utility integrated with LeetCode for downloading your submissions and many more things</h4>
 
 <p align="center">
     <a href="https://www.python.org/">
@@ -50,6 +50,9 @@ codes to it.
   <br>
 </h1>
 
+ - Download all LeetCode Submissions.
+ - Upload them to a github repo
+ - List your submissons with statistics	   
  - **Async support** to fetch all submissions.
  - Uses **LeetCode's GraphQL** to fetch data.
  - **Github's REST API** integration to auto-create repository.
