@@ -26,10 +26,9 @@ def checkGithubToken():
 def getGithubToken():
     if checkGithubToken():
         return os.environ["GITHUB_TOKEN"]
-    else:
-        # handle error 
-        handleError("Please fill the credentials. Run python3 leetcode-py-cli.py --github!") 
-        exit(1)
+    # else:
+    #     # handle error 
+    #     handleError("Please fill the credentials. Run python3 leetcode-py-cli.py --github!")     
 
 def check():
     if os.environ['LEETCODE_CSRFTOKEN'] and os.environ['LEETCODE_SESSION']:
@@ -43,9 +42,8 @@ def getCookies():
             "LEETCODE_SESSION": os.getenv("LEETCODE_SESSION")
             }
         return cookies
-    else:
-        handleError("Please login. Run python3 leetcode-py-cli.py --login!")
-        exit(1)
+    # else:
+    #     handleError("Please login. Run python3 leetcode-py-cli.py --login!")        
 
 def getSubmissionDirectory():
     directory = os.getenv("SUBMISSION_DIRECTORY")
