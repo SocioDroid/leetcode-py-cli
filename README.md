@@ -74,19 +74,22 @@ codes to it.
 
 ##### Signing In
 * LeetCode is protected by reCAPTCHA which restricts us to sign in directly. So instead we'll be using the session token to authorize the user. 
-	1. Sign In to [LeetCode](https://leetcode.com/accounts/login/) using your browser as you would normally do.
-	2.  We need the `csrftoken` & `LEETCODE_SESSION` cookie which can be easily fetched using the browser devtools. 
+	#### Step 1 
+	 Sign In to [LeetCode](https://leetcode.com/accounts/login/) using your browser as you would normally do.
+	#### Step 2
+	 We need the `csrftoken` & `LEETCODE_SESSION` cookie which can be easily fetched using the browser devtools. 
 	  <img src="static/leetcode-login.gif" alt="leetcode-login" width="700px">	
-	3. To login, run the following command and paste the cookies.
+	#### Step 3
+	 To login, run the following command and paste the cookies.
 
-			$ python3 leetcode-py-cli.py -l                     
-			                                
-			Enter LEETCODE_SESSION : <your LEETCODE_SESSION>
-			Enter csrftoken : <your csrftoken>
+	  $ python3 leetcode-py-cli.py -l                     
+		                                
+	   Enter LEETCODE_SESSION : <your LEETCODE_SESSION>
+	   Enter csrftoken : <your csrftoken>
 
 
 ## Usage
-	 python3 leetcode-py-cli.py -h
+	$ python3 leetcode-py-cli.py -h
 This will display help for the tool. Here are all the options it supports.
 
 |          Command      |        Description                         |      Example                          |
