@@ -5,7 +5,7 @@
 </h1>
 
 
-<h4 align="center">A CLI utility integrated with LeetCode for accessing your submissions and many </h4>
+<h4 align="center">A CLI utility integrated with LeetCode for downloading your submissions and many more things</h4>
 
 <p align="center">
     <a href="https://www.python.org/">
@@ -14,13 +14,7 @@
     <a href="https://github.com/SocioDroid/leetcode-py-cli/commits/master">
     <img src="https://img.shields.io/github/last-commit/SocioDroid/leetcode-py-cli.svg"
          alt="GitHub last commit">
-    <a href="https://github.com/SocioDroid/leetcode-py-cli/issues">
-    <img src="https://img.shields.io/github/issues-raw/SocioDroid/leetcode-py-cli.svg"
-         alt="GitHub issues">
-    <a href="https://github.com/SocioDroid/leetcode-py-cli/pulls">
-    <img src="https://img.shields.io/github/issues-pr-raw/SocioDroid/leetcode-py-cli.svg"
-         alt="GitHub pull requests">
-    <a href="https://twitter.com/intent/tweet?text=Try this CS:GO AutoExec:&url=https%3A%2F%2Fgithub.com%2FArmynC%2FArminC-AutoExec">
+    <a href="https://twitter.com/intent/tweet?text=Try leetcode-py-cli which connects your leetcode profile with CLI. Download / View, your submissions. Integrated with github to push your submissions without any hastle&url=https://github.com/SocioDroid/leetcode-py-cli">
     <img src="https://img.shields.io/twitter/url/https/github.com/SocioDroid/leetcode-py-cli.svg?logo=twitter"
          alt="GitHub tweet">
 </p>
@@ -56,6 +50,9 @@ codes to it.
   <br>
 </h1>
 
+ - Download all LeetCode Submissions.
+ - Upload them to a github repo
+ - List your submissons with statistics	   
  - **Async support** to fetch all submissions.
  - Uses **LeetCode's GraphQL** to fetch data.
  - **Github's REST API** integration to auto-create repository.
