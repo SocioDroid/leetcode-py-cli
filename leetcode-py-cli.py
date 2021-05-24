@@ -74,7 +74,7 @@ elif args.submission:
     downloadSubmission(int(args.submission))
 
 elif args.list_questions:    
-    downloadAllSubmissions()
+    listSubmission()
     ls = []
     for i in jsonfile:
         j =  list(i.values())
