@@ -158,6 +158,7 @@ def listSubmission():
     spinner = Halo(text='Gathering questions', spinner='dots')
     spinner.start()
     init.solvedQuestions = getSolvedQuestions()
+    print(init.solvedQuestions)
     spinner.succeed("Questions loaded successfully")
     spinner = Halo(text='Loading submissions', spinner='dots')
     spinner.start()
@@ -168,6 +169,7 @@ def listSubmission():
         future = asyncio.ensure_future(get_submissions_asynchronous())
         loop.run_until_complete(future)
 
+    print(init.solvedSubmissions)
     init.jsonfile = []
     for id, submission in init.solvedSubmissions.items():
         title = init.solvedQuestions[id]

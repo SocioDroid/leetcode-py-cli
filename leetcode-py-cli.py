@@ -1,4 +1,4 @@
-from src.init import *
+import src.init as init
 from src.service_async import *
 from src.service_sync import *
 from src.github import initGit
@@ -76,7 +76,7 @@ elif args.submission:
 elif args.list_questions:    
     listSubmission()
     ls = []
-    for i in jsonfile:
+    for i in init.jsonfile:
         j =  list(i.values())
         ls.append([j[0], j[1], j[4], j[5], j[6], j[7]])
 

@@ -64,6 +64,8 @@ def getSubmissionDirectory():
         os.makedirs(directory + "/code/")
     if not os.path.isfile(directory + "submission.json"):
         open(directory + "submission.json", "w").close()
+
+    
     return directory
 
 
