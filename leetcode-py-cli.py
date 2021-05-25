@@ -90,12 +90,13 @@ elif args.login:
         set_key('.env', 'LEETCODE_SESSION', session)
         set_key('.env', 'LEETCODE_CSRFTOKEN', csrf)
     else:
-        inp = input("You are already Logged in. Do you still want to change the details.[Y/n] : ")
-        if inp.lower() == 'y':
-            session = input("Enter LEETCODE_SESSION : ")
-            csrf = input("\nEnter csrftoken : ")
-            set_key('.env', 'LEETCODE_SESSION', session)
-            set_key('.env', 'LEETCODE_CSRFTOKEN', csrf)
+        if not init.login_flag:
+            inp = input("You are already Logged in. Do you still want to change the details.[Y/n] : ")
+            if inp.lower() == 'y':
+                session = input("Enter LEETCODE_SESSION : ")
+                csrf = input("\nEnter csrftoken : ")
+                set_key('.env', 'LEETCODE_SESSION', session)
+                set_key('.env', 'LEETCODE_CSRFTOKEN', csrf)
         
 elif args.github:
     # Add a check

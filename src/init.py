@@ -22,6 +22,7 @@ GITHUB_REPO=
     f.close()
 
 load_dotenv()
+login_flag = False
 if not check():
     session = input("Enter LEETCODE_SESSION : ")
     csrf = input("\nEnter csrftoken : ")
@@ -29,7 +30,7 @@ if not check():
     set_key('.env', 'LEETCODE_CSRFTOKEN', csrf)
     os.environ['LEETCODE_SESSION'] = session
     os.environ['LEETCODE_CSRFTOKEN'] = csrf
-
+    login_flag = True
 
 cookies = getCookies()
 # print(cookies,'123414')
