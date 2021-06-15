@@ -31,7 +31,7 @@
 ---
 
 ## About 💡
-
+<div id="about">
 <table>
 <tr>
 <td>
@@ -43,8 +43,11 @@ codes to it.
 </td>
 </tr>
 </table>
-
+</div>
+	    
 ## Features ⚡️
+	    
+<div id="features">	    
 <h1 align="left">
   <img src="static/leetcode-ls.svg" alt="leetcode-py-cli" width="700px"></a>
   <br>
@@ -57,9 +60,11 @@ codes to it.
  - Uses **LeetCode's GraphQL** to fetch data.
  - **Github's REST API** integration to auto-create repository.
  - Retrieve & push new submissions on the go.
-
+</div>	
 
 ## Installation ⚙️
+
+<div id="installation">	
 
 ##### Downloading and installing steps:
 * **[Download](https://github.com/SocioDroid/leetcode-py-cli/archive/main.zip)** the latest version of the repo or clone it using 
@@ -83,9 +88,12 @@ codes to it.
 		                                
 	   Enter LEETCODE_SESSION : <your LEETCODE_SESSION>
 	   Enter csrftoken : <your csrftoken>
-
+</div>
 
 ## Usage 🗄️
+
+<div id="usage">
+	
 	$ python3 leetcode-py-cli.py -h
 This will display help for the tool. Here are all the options it supports.
 
@@ -100,7 +108,12 @@ This will display help for the tool. Here are all the options it supports.
 | -g, --github          | Push your code to github                   | leetcode-py-cli<span>.</span>py -g    |
 | -v, --version         | Show program's version number              | leetcode-py-cli<span>.</span>py -v    | 
 
+</div>
+	
 ## Github Integration 🔧️
+	
+<div id="github-integration">
+	
 leetcode-py-cli will automatically push your submissions to a github repo and later update it regularly once new submissions are made.
 #### Step 1
 Visit https://github.com/settings/tokens and generate a personal access token.
@@ -125,7 +138,8 @@ Run the tool with the `-g` option which will download all the submissions and cr
 	https://github.com/SocioDroid/leetcode/
 
 Check out **[this repo](https://github.com/SocioDroid/leetcode/)** which was created using leetcode-py-cli
-
+</div>
+	
 ## TO DO ☑️
 - [ ] Implement inplace code submisson
 - [ ] Display other statistics
