@@ -143,14 +143,18 @@ def getStats():
         3: "h",
         4: "super_hard",
         "ac": "accepted",
-        None: "total",
+        None: "todo",
         "notac": "in_progress"
     }
     status_set = set([x['status'] for x in question_list])
     level_set = set([x['difficulty']['level'] for x in question_list])
+    levels_summary['a_total'] = len(question_list)
     for status in status_set:
-        levels_summary[f't_{translator[status]}'] = len(
+        levels_summary[f'a_{translator[status]}'] = len(
             [x for x in question_list if x['status'] == status])
+    for level in level_set:
+        levels_summary[f'{translator[level]}_total'] = len(
+            [x for x in question_list if x['difficulty']['level'] == level])
     for level, status in itertools.product(level_set, status_set):
         levels_summary[f'{translator[level]}_{translator[status]}'] = len(
             [x for x in question_list if x['difficulty']['level'] == level and x['status'] == status])

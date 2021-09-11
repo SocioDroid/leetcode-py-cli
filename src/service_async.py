@@ -173,13 +173,17 @@ def listStats():
     init.stats = stats
     spinner.succeed("Stats loaded successfully")
     print(
-        f"All: \t{stats['t_total']:6d} total, {stats['t_accepted']:6d} done, {stats['t_in_progress']:6d} in progress")
+        f"All: \t{stats['a_todo']:6d} todo, {stats['a_accepted']:6d} done, "
+        f"{stats['a_in_progress']:6d} in progress, {stats['a_total']:6d} total")
     print(
-        f"{bcolors.OKGREEN}Easy: \t{stats['e_total']:6d} total, {stats['e_accepted']:6d} done, {stats['e_in_progress']:6d} in progress{bcolors.ENDC}")
+        f"{bcolors.OKGREEN}Easy: \t{stats['e_todo']:6d} todo, {stats['e_accepted']:6d} done, "
+        f"{stats['e_in_progress']:6d} in progress, {stats['e_total']:6d} total{bcolors.ENDC}")
     print(
-        f"{bcolors.WARNING}Medium: {stats['m_total']:6d} total, {stats['m_accepted']:6d} done, {stats['m_in_progress']:6d} in progress{bcolors.ENDC}")
+        f"{bcolors.WARNING}Medium: {stats['m_todo']:6d} todo, {stats['m_accepted']:6d} done, "
+        f"{stats['m_in_progress']:6d} in progress, {stats['m_total']:6d} total{bcolors.ENDC}")
     print(
-        f"{bcolors.FAIL}Hard: \t{stats['h_total']:6d} total, {stats['h_accepted']:6d} done, {stats['h_in_progress']:6d} in progress{bcolors.ENDC}")
+        f"{bcolors.FAIL}Hard: \t{stats['h_todo']:6d} todo, {stats['h_accepted']:6d} done, "
+        f"{stats['h_in_progress']:6d} in progress, {stats['h_total']:6d} total{bcolors.ENDC}")
 
 
 def listSubmission():
