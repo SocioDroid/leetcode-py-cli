@@ -154,6 +154,38 @@ def downloadAllSubmissions():
     spinner.stop()
 
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
+def listStats():
+    spinner = Halo(text='Gathering your statistics', spinner='dots')
+    spinner.start()
+    stats = getStats()
+    init.stats = stats
+    spinner.succeed("Stats loaded successfully")
+    print(
+        f"All: \t{stats['a_todo']:6d} todo, {stats['a_accepted']:6d} done, "
+        f"{stats['a_in_progress']:6d} in progress, {stats['a_total']:6d} total")
+    print(
+        f"{bcolors.OKGREEN}Easy: \t{stats['e_todo']:6d} todo, {stats['e_accepted']:6d} done, "
+        f"{stats['e_in_progress']:6d} in progress, {stats['e_total']:6d} total{bcolors.ENDC}")
+    print(
+        f"{bcolors.WARNING}Medium: {stats['m_todo']:6d} todo, {stats['m_accepted']:6d} done, "
+        f"{stats['m_in_progress']:6d} in progress, {stats['m_total']:6d} total{bcolors.ENDC}")
+    print(
+        f"{bcolors.FAIL}Hard: \t{stats['h_todo']:6d} todo, {stats['h_accepted']:6d} done, "
+        f"{stats['h_in_progress']:6d} in progress, {stats['h_total']:6d} total{bcolors.ENDC}")
+
+
 def listSubmission():
     spinner = Halo(text='Gathering questions', spinner='dots')
     spinner.start()
