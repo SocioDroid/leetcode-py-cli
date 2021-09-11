@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import requests
 import json
+import itertools
 
 load_dotenv()
 
@@ -65,7 +66,6 @@ def getSubmissionDirectory():
     if not os.path.isfile(directory + "submission.json"):
         open(directory + "submission.json", "w").close()
 
-    
     return directory
 
 
@@ -118,6 +118,7 @@ def getSolvedQuestions():
     question_list = json.loads(resp.content.decode("utf-8"))
     for question in question_list["stat_status_pairs"]:
         if question["status"] == "ac":
+
             solvedQuestions.update(
                 {
                     question["stat"]["frontend_question_id"]: question["stat"][
@@ -127,3 +128,31 @@ def getSolvedQuestions():
             )
 
     return solvedQuestions
+
+
+def getStats():
+    resp = requests.get(
+        getBaseURL() + "/api/problems/all/", cookies=getCookies(), timeout=10
+    )
+    question_list = json.loads(
+        resp.content.decode("utf-8"))["stat_status_pairs"]
+    levels_summary = {}
+    translator = {
+        1: "e",
+        2: "m",
+        3: "h",
+        4: "super_hard",
+        "ac": "accepted",
+        None: "total",
+        "notac": "in_progress"
+    }
+    status_set = set([x['status'] for x in question_list])
+    level_set = set([x['difficulty']['level'] for x in question_list])
+    for status in status_set:
+        levels_summary[f't_{translator[status]}'] = len(
+            [x for x in question_list if x['status'] == status])
+    for level, status in itertools.product(level_set, status_set):
+        levels_summary[f'{translator[level]}_{translator[status]}'] = len(
+            [x for x in question_list if x['difficulty']['level'] == level and x['status'] == status])
+
+    return levels_summary
